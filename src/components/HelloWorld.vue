@@ -19,16 +19,22 @@
     v-model="value" value="b" id="b">
     <label for="b">B
     </label>
-    
-    <hr>
+
     <button v-on:click="increment">Increment</button>
     {{ count }}
+    <hr>
+
     <div 
     v-for="num in numbers" 
     v-bind:key="num"
     v-bind:class="getClass(num)"
-    >
-      <span>{{ num }}</span>
+     style="display: inline;">
+
+    <button style="margin: 5px;" 
+      v-on:click="click(num)">
+      <span v-bind:class="getClass(num)">{{ num }}</span>
+    </button>
+    
   </div>
 </div>
 
@@ -70,6 +76,10 @@ export default {
       console.log('event',$event.target.value)
     
 
+    },
+    click(num){
+      console.log('num',num);
+      this.$emit('selected',num)
     }
   }
 
