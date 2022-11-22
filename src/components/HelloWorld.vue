@@ -1,8 +1,27 @@
 <template>
   <div class="hello">
-    <button v-on:click="increment()">Increment</button>
-    {{                                 count                                 }}
+    <input 
+      v-bind:value="value"
+      v-on:input="input"
+      />
+      <div>
+    {{  value  }}
+      </div>
+      <div class="red">
+        {{error}}
+      </div>
+    <hr>
+    <button v-on:click="increment">Increment</button>
+    {{ count }}
+    <div 
+    v-for="num in numbers" 
+    v-bind:key="num"
+    v-bind:class="getClass(num)"
+    >
+      <span>{{ num }}</span>
   </div>
+</div>
+
 </template>
 
 <script>
@@ -10,19 +29,49 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      count: 0
+      count: 0,
+      value: 0,
+      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      error:''
+    }
+  },
+  computed: {
+    evenList() {
+      return this.numbers.filter(num => this.isEven(num));
     }
   },
   methods: {
-      increment(){
-        this.count++;
+    increment() {
+      this.count++;
+    },
+    isEven(num) {
+      return num % 2 === 0;
+    },
+    getClass(num) {
+      return this.isEven(num) ? 'blue' : 'red';
+    },
+    input($event){
+      this.value=$event.target.value;
+      console.log('event',$event.target.value)
+      if($event.target.value.length<5){
+        this.error='Must be more than 5'
+      }else{
+        this.error='';
       }
+
     }
-  
+  }
+
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.red {
+  color: red;
+}
 
+.blue {
+  color: blue;
+}
 </style>
