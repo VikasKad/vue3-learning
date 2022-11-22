@@ -11,6 +11,16 @@
         {{error}}
       </div>
     <hr>
+    <input type="radio" name="a" 
+    v-model="value" value="a" id="a">
+    <label for="a">A
+    </label>
+    <input type="radio" name="b" 
+    v-model="value" value="b" id="b">
+    <label for="b">B
+    </label>
+    
+    <hr>
     <button v-on:click="increment">Increment</button>
     {{ count }}
     <div 
