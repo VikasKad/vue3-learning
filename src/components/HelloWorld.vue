@@ -32,12 +32,17 @@ export default {
       count: 0,
       value: 0,
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      error:''
     }
   },
   computed: {
     evenList() {
       return this.numbers.filter(num => this.isEven(num));
+    },
+    error(){
+      if(this.value.length<5){
+        return 'Must be more than 5';
+      }
+      return '';
     }
   },
   methods: {
@@ -53,11 +58,7 @@ export default {
     input($event){
       this.value=$event.target.value;
       console.log('event',$event.target.value)
-      if($event.target.value.length<5){
-        this.error='Must be more than 5'
-      }else{
-        this.error='';
-      }
+    
 
     }
   }
