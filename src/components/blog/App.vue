@@ -8,16 +8,20 @@
         {{ post.content }}
       </template>
       <template v-slot:description>
-        <ControlsContainer :post="post" />
+        <ControlsContainer :post="post" @setHashtag="setHashtag" />
       </template>
     </card-container>
   </div>
+  <h1>
+    {{ currentTag }}
+  </h1>
 </template>
 
 <script>
 import { store } from "./store";
 import CardContainer from "./../CardContainer.vue";
 import ControlsContainer from "./Controls.vue";
+import { ref } from "vue";
 export default {
   name: "AppContainer",
   components: {
@@ -25,8 +29,14 @@ export default {
     ControlsContainer,
   },
   setup() {
+    const currentTag = ref();
+    const setHashtag = (val) => {
+      currentTag.value = val;
+    };
     return {
       store,
+      currentTag,
+      setHashtag,
     };
   },
 };
@@ -34,7 +44,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.cards-container{
-    display: flex;
+.cards-container {
+  display: flex;
 }
 </style>
