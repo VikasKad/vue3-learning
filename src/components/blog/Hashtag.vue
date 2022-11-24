@@ -1,25 +1,29 @@
 <template>
-  <div class="hashtag" @click="click">{{ hashtag }}</div>
+  <div 
+    class="hashtag"
+    @click="click"
+  >
+    #{{ hashtag }}
+  </div>
 </template>
 
 <script>
+import {store} from './store'
 export default {
   name: "HashTag",
-  emits:['setHashtag'],
   props: {
     hashtag: {
       type: String,
     },
   },
-  setup(props, ctx) {
-    console.log("props", props);
-    const click = () => {
-      // store.setHashtag(props.hashtag)
-      ctx.emit("setHashtag", props.hashtag);
-    };
+  setup(props) {
+       const click = () => {
+      store.setHashtag(props.hashtag)
+    }
     return {
-      click,
-    };
+      click
+    }
+
   },
 };
 </script>

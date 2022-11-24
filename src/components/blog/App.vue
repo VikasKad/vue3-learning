@@ -1,50 +1,71 @@
 <template>
-  <div class="cards-container">
-    <card-container v-for="post in store.state.posts" :key="post.id">
-      {{ post.id }}
+  <div id="wrapper">
+    <div>
+      <label>Search hashtag:</label>
+      <input :value="currentTag" @input="handleInput" placeholder="#vue" />
+    </div>
+    <div class="cards">
+      <card v-for="post in filteredPosts" :key="post.id">
+        <template v-slot:title>
+          {{ post.title }}
+        </template>
 
-      <template v-slot:title> {{ post.title }}</template>
-      <template v-slot:content>
-        {{ post.content }}
-      </template>
-      <template v-slot:description>
-        <ControlsContainer :post="post" @setHashtag="setHashtag" />
-      </template>
-    </card-container>
+        <template v-slot:content>
+          {{ post.content }}
+        </template>
+
+        <template v-slot:description>
+          <controls :post="post" />
+        </template>
+      </card>
+    </div>
   </div>
-  <h1>
-    {{ currentTag }}
-  </h1>
 </template>
 
 <script>
-import { store } from "./store";
-import CardContainer from "./../CardContainer.vue";
-import ControlsContainer from "./Controls.vue";
-import { ref } from "vue";
+import { computed } from "vue";
+import { store } from "./store.js";
+import Card from "../CardContainer.vue";
+import Controls from "./Controls.vue";
 export default {
   name: "AppContainer",
   components: {
-    CardContainer,
-    ControlsContainer,
+    Card,
+    Controls,
   },
   setup() {
-    const currentTag = ref();
-    const setHashtag = (val) => {
-      currentTag.value = val;
+    const handleInput = ($event) => {
+      store.setHashtag($event.target.value);
     };
     return {
-      store,
-      currentTag,
-      setHashtag,
+      filteredPosts: computed(() => store.posts),
+      handleInput,
+      currentTag: computed(() => store.state.currentTag),
     };
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.cards-container {
+.cards {
   display: flex;
+  justify-content: center;
+}
+input,
+label {
+  font-size: 30px;
+}
+input {
+  height: 30px;
+  width: 200px;
+  padding: 5px;
+  margin: 5px;
+  margin: 30px;
+}
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>

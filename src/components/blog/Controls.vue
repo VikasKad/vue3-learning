@@ -1,40 +1,35 @@
 <template>
-  <button>Likes</button> {{ post.likes }} {{ post }}
-  <hash-tag
-    v-for="hashtag in post.hashtags"
-    :key="hashtag"
-    :hashtag="hashtag"
-    @setHashtag="setHashtag"
-  >
-  </hash-tag>
+  <div>{{ post.likes }}</div>
+  <button @click="handleLike">❤️ Like</button>
+  <hr />
+  <hashtag v-for="hashtag in post.hashtags" :key="hashtag" :hashtag="hashtag" />
 </template>
 
 <script>
-import HashTag from "./Hashtag.vue";
+import Hashtag from "./Hashtag.vue";
+import { store } from "./store.js";
 export default {
-  name: "ControlsContainer",
+  name: "ControlContainer",
   components: {
-    HashTag,
+    Hashtag,
   },
-  emits:['setHashtag'],
   props: {
     post: {
+      // id
+      // title
+      // content
+      // likes
+      // hashtags
       type: Object,
-      required: true,
     },
   },
-  setup(props, ctx) {
-    console.log("props", props);
-    const setHashtag = (value) => {
-      console.log("value", value);
-      ctx.emit("setHashtag", value);
+  setup(props) {
+    const handleLike = () => {
+      store.likePost(props.post);
     };
     return {
-      setHashtag,
+      handleLike,
     };
   },
 };
 </script>
-
-<style>
-</style>
