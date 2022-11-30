@@ -2,6 +2,9 @@
   <!-- <PokemonContainer /> -->
   <!-- <HelloWorld v-on:selected="printNumber"/> -->
   <!-- // <CompositionApp /> -->
+  <router-link to="/hello">Hello</router-link>
+  <br>
+  <router-link to="/post">Post</router-link>
   <router-view />
   <!-- <AppContainer /> -->
 </template>
