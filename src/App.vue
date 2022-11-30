@@ -2,21 +2,22 @@
   <!-- <PokemonContainer /> -->
   <!-- <HelloWorld v-on:selected="printNumber"/> -->
   <!-- // <CompositionApp /> -->
-  <AppContainer />
+  <router-view />
+  <!-- <AppContainer /> -->
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 // import PokemonContainer from './components/Pokemon.vue';
 // import CompositionApp from "./components/Composition.vue";
-import AppContainer from "./components/blog/App.vue";
+// import AppContainer from "./components/blog/App.vue";
 export default {
   name: "App",
   components: {
     // HelloWorld,
     // PokemonContainer
     // CompositionApp,
-    AppContainer,
+    // AppContainer,
   },
   methods: {
     printNumber(val) {
