@@ -1,10 +1,11 @@
 <template>
-  <p>Post 1</p>
+  <p>Posts</p>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {
-name:'PostContainer'
+name:'PostsContainer'
 }
 </script>
 

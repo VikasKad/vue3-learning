@@ -3,6 +3,7 @@ import {
     createRouter
 } from 'vue-router';
 import HelloContainer from './HelloContainer';
+import PostsContainer from './PostsContainer';
 import PostContainer from './PostContainer';
 const router = createRouter({
     history: createWebHistory(),
@@ -11,8 +12,13 @@ const router = createRouter({
             component: HelloContainer
         },
         {
-            path:'/post',
-            component:PostContainer
+            path: '/post',
+            component: PostsContainer,
+            children: [{
+                path: ':id',
+                component: PostContainer
+
+            }]
         }
     ]
 })
